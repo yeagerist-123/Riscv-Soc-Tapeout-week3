@@ -124,7 +124,13 @@ write_verilog -noattr output/post_synth_sim/vsdbabysoc.synth.v
 ### **Step 1: Compile the Testbench**
 Run the following `iverilog` command to compile the testbench:
 ```bash
-iverilog -o /home/ananya123/VSDBabySoCC/VSDBabySoC/output/post_synth_sim/post_synth_sim.out -DPOST_SYNTH_SIM -DFUNCTIONAL -DUNIT_DELAY=#1 -I /home/ananya123/VSDBabySoCC/VSDBabySoC/src/include -I /home/ananya123/VSDBabySoCC/VSDBabySoC/src/module /home/ananya123/VSDBabySoCC/VSDBabySoC/src/module/testbench.v
+iverilog -o /home/mohan/Desktop/vlsi/VSDBabySoC/output/post_synth_sim/post_synth_sim.out \
+-DPOST_SYNTH_SIM -DFUNCTIONAL -DUNIT_DELAY=#1 \
+-I /home/mohan/Desktop/vlsi/VSDBabySoC/src/include \
+-I /home/mohan/Desktop/vlsi/VSDBabySoC/src/module \
+-I /home/mohan/Desktop/vlsi/VSDBabySoC/src/gls_model \
+/home/mohan/Desktop/vlsi/VSDBabySoC/src/module/testbench.v
+
 ```
 ---
 ### **Step 2: Navigate to the Post-Synthesis Simulation Output Directory**
