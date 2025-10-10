@@ -28,32 +28,31 @@ Here is the step-by-step execution plan for running the  commands manually:
 yosys
 ```
 
-![WhatsApp Image 2024-11-16 at 5 20 29 AM (4)](https://github.com/user-attachments/assets/69c01da4-592e-4165-afcf-d42eb0eab08c)
+<img width="1920" height="922" alt="w3-1" src="https://github.com/user-attachments/assets/9d6092ca-1b4e-4d8a-9e0c-a776eb05a4d3" />
+
 
 
 Inside the Yosys shell, run:
 ```yosys
-read_verilog /home/ananya123/VSDBabySoCC/VSDBabySoC/src/module/vsdbabysoc.v
-read_verilog -I /home/ananya123/VSDBabySoCC/VSDBabySoC/src/include /home/ananya123/VSDBabySoCC/src/module/rvmyth.v
-read_verilog -I /home/ananya123/VSDBabySoCC/VSDBabySoC/src/include /home/ananya123/VSDBabySoCC/src/module/clk_gate.v
+read_verilog src/module/vsdbabysoc.v
+read_verilog -I src/include src/module/rvmyth.v
+read_verilog -I src/include src/module/clk_gate.v
 
 ```
-![WhatsApp Image 2024-11-16 at 5 54 12 AM](https://github.com/user-attachments/assets/648dc511-7c3c-496a-97c7-a24aa6cb0bae)
+<img width="1920" height="922" alt="w3-2" src="https://github.com/user-attachments/assets/7422858d-6df3-4d83-98aa-df5954aa781a" />
 
-![WhatsApp Image 2024-11-16 at 5 20 29 AM (2)](https://github.com/user-attachments/assets/6db87310-6389-4f7c-9418-40e4f6780c18)
-
-![WhatsApp Image 2024-11-16 at 5 20 29 AM (1)](https://github.com/user-attachments/assets/8eddf6c8-c3fb-44d9-b804-5eb836558c44)
 
 ---
 
 ### **Step 2: Load the Liberty Files for Synthesis**
 Inside the same Yosys shell, run:
 ```yosys
-read_liberty -lib /home/ananya123/VSDBabySoCC/VSDBabySoC/src/lib/avsdpll.lib
-read_liberty -lib /home/ananya123/VSDBabySoCC/VSDBabySoC/src/lib/avsddac.lib
-read_liberty -lib /home/ananya123/VSDBabySoCC/VSDBabySoC/src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+read_liberty -lib src/lib/avsdpll.lib
+read_liberty -lib src/lib/avsddac.lib
+read_liberty -lib src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 ```
-![WhatsApp Image 2024-11-16 at 5 20 29 AM](https://github.com/user-attachments/assets/2ec505bd-8004-415f-ba9c-3b76a41562f8)
+<img width="1920" height="922" alt="w3-3" src="https://github.com/user-attachments/assets/cfd03612-38a0-48a4-b6d9-40698edb74fd" />
+
 
 ---
 
@@ -61,30 +60,30 @@ read_liberty -lib /home/ananya123/VSDBabySoCC/VSDBabySoC/src/lib/sky130_fd_sc_hd
 ```yosys
 synth -top vsdbabysoc
 ```
-![WhatsApp Image 2024-11-16 at 5 20 28 AM](https://github.com/user-attachments/assets/8a49050d-55cb-4ae2-9a93-5fe7c2c72710)
-![WhatsApp Image 2024-11-16 at 5 20 26 AM](https://github.com/user-attachments/assets/f00545e7-bb37-4444-80e7-0881938fb634)
-![WhatsApp Image 2024-11-16 at 5 20 24 AM (2)](https://github.com/user-attachments/assets/655dfaaf-bece-47dc-8a24-bf257e064a4f)
-![WhatsApp Image 2024-11-16 at 5 20 24 AM (1)](https://github.com/user-attachments/assets/5d7a9d12-7722-432c-8ad6-270be51b1df9)
-![WhatsApp Image 2024-11-16 at 5 20 24 AM](https://github.com/user-attachments/assets/51f25b92-c968-4cf3-b553-21ecdbefc828)
-![WhatsApp Image 2024-11-16 at 5 20 23 AM (8)](https://github.com/user-attachments/assets/241a089c-ce62-4f2c-8c6b-9e76d3929197)
+
+<img width="1920" height="922" alt="w3-4" src="https://github.com/user-attachments/assets/90b56053-e87c-4d5c-ad94-6a856d6de66f" />
+
 
 ---
 
 ### **Step 4: Map D Flip-Flops to Standard Cells**
 ```yosys
-dfflibmap -liberty /home/ananya123/VSDBabySoCC/VSDBabySoC/src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+dfflibmap -liberty src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
 ```
-![WhatsApp Image 2024-11-16 at 5 20 23 AM (7)](https://github.com/user-attachments/assets/566b121d-a5da-47c2-a09b-1660592569c5)
+<img width="1920" height="922" alt="w3-5" src="https://github.com/user-attachments/assets/2efdae06-3b7c-4e20-8346-32b716db4a7c" />
+
 
 ---
 
 ### **Step 5: Perform Optimization and Technology Mapping**
 ```yosys
 opt
-abc -liberty /home/ananya123/VSDBabySoCC/VSDBabySoC/src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib -script +strash;scorr;ifraig;retime;{D};strash;dch,-f;map,-M,1,{D}
+abc -liberty src/lib/sky130_fd_sc_hd__tt_025C_1v80.lib -script +strash;scorr;ifraig;retime;{D};strash;dch,-f;map,-M,1,{D}
 ```
-![WhatsApp Image 2024-11-16 at 5 20 23 AM (6)](https://github.com/user-attachments/assets/5657a167-e0e2-431a-882e-4a785b059b5d)
-![WhatsApp Image 2024-11-16 at 5 20 23 AM (5)](https://github.com/user-attachments/assets/a0ab61ba-24dc-4b9b-83fa-eb5b78f79f40)
+<img width="1920" height="922" alt="w3-6" src="https://github.com/user-attachments/assets/12f7c45f-e556-4540-89b7-8f2fbb71af72" />
+<img width="1920" height="922" alt="w3-7" src="https://github.com/user-attachments/assets/089d894e-c1a4-4d2f-bd8c-ddd2cb2ff128" />
+<img width="1920" height="922" alt="w3-8" src="https://github.com/user-attachments/assets/4791bfe2-cfe8-463c-b05c-311570663c63" />
+<img width="1920" height="922" alt="w3-9" src="https://github.com/user-attachments/assets/f881afdf-4869-4c1f-8af8-567f6b4a2145" />
 
 ---
 
@@ -95,7 +94,7 @@ setundef -zero
 clean -purge
 rename -enumerate
 ```
-![WhatsApp Image 2024-11-16 at 5 20 23 AM (4)](https://github.com/user-attachments/assets/e2fd7bc4-5e8a-4236-84dc-002887f3eb82)
+<img width="1920" height="922" alt="w3-10" src="https://github.com/user-attachments/assets/647842c9-36b8-49e8-86e4-c7e867e124d3" />
 
 ---
 
@@ -103,17 +102,19 @@ rename -enumerate
 ```yosys
 stat
 ```
-![WhatsApp Image 2024-11-16 at 5 20 23 AM (3)](https://github.com/user-attachments/assets/292c9093-9a6d-417e-b094-0b8a6e27e7c3)
-![WhatsApp Image 2024-11-16 at 5 20 23 AM (2)](https://github.com/user-attachments/assets/ce8ad45b-92ae-4cc8-a4dd-0f52028e078e)
-![WhatsApp Image 2024-11-16 at 5 20 23 AM (1)](https://github.com/user-attachments/assets/e1741767-2b83-4d88-909e-e5d4c73411f4)
+<img width="1920" height="922" alt="w3-11" src="https://github.com/user-attachments/assets/c7ebc41c-b2fa-404e-a284-9f76ea8738cc" />
+<img width="1920" height="922" alt="w3-12" src="https://github.com/user-attachments/assets/c7cd50cc-31c9-465a-88c9-2cc850beffd6" />
+<img width="1920" height="922" alt="w3-13" src="https://github.com/user-attachments/assets/3b1e07aa-b896-475a-a9bf-044547714303" />
 
 ---
 
+
 ### **Step 8: Write the Synthesized Netlist**
 ```yosys
-write_verilog -noattr /home/ananya123/VSDBabySoCC/VSDBabySoC/output/post_synth_sim/vsdbabysoc.synth.v
+write_verilog -noattr output/post_synth_sim/vsdbabysoc.synth.v
 ```
-![WhatsApp Image 2024-11-16 at 5 20 23 AM](https://github.com/user-attachments/assets/1e0444b4-ad66-4798-b7f7-7bc1e13cf88a)
+
+<img width="1920" height="269" alt="w313" src="https://github.com/user-attachments/assets/39bd9e8e-d959-466a-8578-f42007a2e330" />
 
 ---
 
@@ -142,10 +143,7 @@ cd output/post_synth_sim/
 ```bash
 gtkwave post_synth_sim.vcd
 ```
+<img width="1920" height="922" alt="w314" src="https://github.com/user-attachments/assets/866b1d27-d5df-4890-84e2-9f9e14b0d55d" />
+<img width="1920" height="922" alt="ps gtk" src="https://github.com/user-attachments/assets/75d3c6d4-4d5d-4299-88d3-341255611cbe" />
+
 ---
-
-![WhatsApp Image 2024-11-25 at 9 07 01 PM](https://github.com/user-attachments/assets/9d79b832-7315-46ed-b028-e2dd5d14d27a)
-
-![WhatsApp Image 2024-11-25 at 9 07 01 PM (2)](https://github.com/user-attachments/assets/0a6d272d-1aae-45b5-b6aa-914a0087df84)
-
-![WhatsApp Image 2024-11-25 at 9 07 01 PM (1)](https://github.com/user-attachments/assets/239557c2-2447-4cd1-a18f-fb1966feebf2)
