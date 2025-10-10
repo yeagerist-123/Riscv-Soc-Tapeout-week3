@@ -153,3 +153,15 @@ gtkwave post_synth_sim.vcd
 <img width="1920" height="922" alt="ps gtk" src="https://github.com/user-attachments/assets/75d3c6d4-4d5d-4299-88d3-341255611cbe" />
 
 ---
+### **Presynthesis wave**
+
+```
+
+```
+
+<img width="1920" height="922" alt="week-2 gtk" src="https://github.com/user-attachments/assets/400629dd-a2e9-4f51-b540-81f761fe39ee" />
+
+---
+### **CONCLUSION**
+
+We can clearly see that both of these are the same so we are able to retain our specification pre and post synthesis.
