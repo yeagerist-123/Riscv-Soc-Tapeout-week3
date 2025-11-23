@@ -578,6 +578,9 @@ sta
 
 source multi_pvt_corners.tcl
 ```
+
+<img width="1920" height="1080" alt="w3-99" src="https://github.com/user-attachments/assets/0d899367-1728-4018-aeeb-489675bdb798" />
+
 ---
 ## STA Output
 - After successfull analysis of `multi pvt corners`, it produces 4 output files.
@@ -590,117 +593,115 @@ sta_worst_min_slack.txt
 ```
 **Screenshot of sta_worst_max_slack.txt**
 
-![Worst slack max](Screenshots/worst_slack_max.jpg)
+<img width="1920" height="1080" alt="wmax" src="https://github.com/user-attachments/assets/dab7c0a4-9483-446c-abc0-37254b1ad38e" />
+
 
 ---
 **Screenshot of sta_worst_min_slack.txt**
 
-![Worst slack min](Screenshots/worst_slack_min.jpg)
+<img width="1920" height="1080" alt="wmin" src="https://github.com/user-attachments/assets/e4e69fb1-5640-4d5e-b201-cf89d0d96cac" />
+
 
 ---
 **Screenshot of sta_wns.txt**
 
-![wns](Screenshots/wns.jpg)
+<img width="1920" height="1080" alt="wns" src="https://github.com/user-attachments/assets/d3203415-ab98-4954-af2a-acf9a03d2660" />
+
 
 ---
 **Screenshot of sta_tns.txt**
 
-![tns](Screenshots/tns.jpg)
+<img width="1920" height="1080" alt="tns" src="https://github.com/user-attachments/assets/d70048ba-6bb6-4a10-be3d-627b0bc9a30a" />
+
 
 ---
 # Multi-PVT Timing Summary Report
 
 This report summarises the **setup and hold timing performance** across multiple PVT (Process, Voltage, Temperature) corners analysed using **OpenSTA** for the vsdbabysoc design.
 
----
+# Timing Summary: VSDBabySoC Post-Route Multi-PVT Analysis
 
-## Timing Summary Table
+## Legend
 
-| Library Corner     | Max/Worst Max Slack (Setup) | Min/Worst Min Slack (Hold) | WNS          | TNS          | Observation                     |
-|-------------------|-----------------------------|----------------------------|--------------|--------------|--------------------------------|
-| ff_n40C_1v95      | 🟩 +3.8703                  | 🟩 +0.1875                 | 🟩 0.0000    | 🟩 0.0000    | Strong setup, hold OK          |
-| ff_100C_1v65      | 🟩 +2.2764                  | 🟩 +0.2491                 | 🟩 0.0000    | 🟩 0.0000    | Setup OK, hold OK              |
-| ff_100C_1v95      | 🟩 +3.7138                  | 🟩 +0.1960                 | 🟩 0.0000    | 🟩 0.0000    | Excellent setup, hold OK       |
-| ff_n40C_1v56      | 🟩 +0.8214                  | 🟩 +0.2915                 | 🟩 0.0000    | 🟩 0.0000    | OK setup, good hold margin     |
-| ff_n40C_1v65      | 🟩 +1.8597                  | 🟩 +0.2551                 | 🟩 0.0000    | 🟩 0.0000    | Setup good, hold OK            |
-| ff_n40C_1v76      | 🟩 +2.7707                  | 🟩 +0.2243                 | 🟩 0.0000    | 🟩 0.0000    | Fast corner stable             |
-| ss_100C_1v40      | 🟥 −13.6381                 | 🟩 +0.9053                 | 🟥 −13.6381  | 🟥 Large     | Major setup fail               |
-| ss_100C_1v60      | 🟥 −6.7098                  | 🟩 +0.6420                 | 🟥 −6.7098   | 🟥 Large     | Setup fail                     |
-| ss_n40C_1v28      | 🟥 −51.2061                 | 🟩 +1.8296                 | 🟥 −51.2061  | 🟥 Severe    | Severe setup fail              |
-| ss_n40C_1v35      | 🟥 −32.0887                 | 🟩 +1.3475                 | 🟥 −32.0887  | 🟥 Large     | Setup fail                     |
-| ss_n40C_1v40      | 🟥 −23.8290                 | 🟩 +1.1249                 | 🟥 −23.8290  | 🟥 Large     | Setup fail                     |
-| ss_n40C_1v44      | 🟥 −19.2010                 | 🟩 +0.9909                 | 🟥 −19.2010  | 🟥 Large     | Setup fail                     |
-| ss_n40C_1v76      | 🟥 −4.4548                  | 🟩 +0.5038                 | 🟥 −4.4548   | 🟥 Large     | Setup fail                     |
-| ss_n40C_1v60      | 🟥 −9.7051                  | 🟩 +0.6628                 | 🟥 −9.7051   | 🟥 Large     | Setup fail                     |
-| tt_025C_1v80      | 🟩 +0.8595                  | 🟩 +0.3096                 | 🟩 0.0000    | 🟩 0.0000    | Typical corner OK              |
-| tt_100C_1v80      | 🟩 +0.9354                  | 🟩 +0.3145                 | 🟩 0.0000    | 🟩 0.0000    | Typical-hot OK                 |
+- 🟩 = Good (positive slack)
+- 🟥 = Bad (negative slack → violation)
 
 ---
 
-### Legend
+## ⭐ Final Timing Summary Table
 
-| Symbol | Meaning                 | Description                               |
-|:------:|:-----------------------|:-----------------------------------------|
-| 🟩     | PASS                    | Slack ≥ 0 ns → Meets timing              |
-| 🟥     | FAILURE                 | Slack ≤ −1 ns → Fails timing             |
+| PVT Corner       | Setup Slack (worst max) | Hold Slack (worst min) | WNS       | TNS         | Observation                          |
+|------------------|------------------------|------------------------|-----------|-------------|--------------------------------------|
+| ff_n40C_1v95     | 🟩 +3.4517              | 🟥 −0.3125              | 🟩 0.0000 | 🟩 0.0000    | Hold slightly failing, setup excellent |
+| ff_100C_1v65     | 🟩 +1.8571              | 🟥 −0.2509              | 🟩 0.0000 | 🟩 0.0000    | Minor hold issue, setup OK           |
+| ff_100C_1v95     | 🟩 +3.2718              | 🟥 −0.3040              | 🟩 0.0000 | 🟩 0.0000    | Hold small violation, setup strong   |
+| ff_n40C_1v56     | 🟩 +0.4674              | 🟥 −0.2085              | 🟩 0.0000 | 🟩 0.0000    | Slight hold violation                |
+| ff_n40C_1v65     | 🟩 +1.4847              | 🟥 −0.2449              | 🟩 0.0000 | 🟩 0.0000    | Minor hold issue                     |
+| ff_n40C_1v76     | 🟩 +2.3758              | 🟥 −0.2757              | 🟩 0.0000 | 🟩 0.0000    | Slight hold violation                |
+| ss_100C_1v40     | 🟥 −13.8601             | 🟩 +0.4053              | 🟥 −13.8601| 🟥 −8230.1904 | Major setup failure                  |
+| ss_100C_1v60     | 🟥 −7.0086              | 🟩 +0.1420              | 🟥 −7.0086 | 🟥 −3244.6812 | Setup fail                           |
+| ss_n40C_1v28     | 🟥 −54.0971             | 🟩 +0.6461              | 🟥 −54.0971| 🟥 −37717.0312| Severe setup fail                    |
+| ss_n40C_1v35     | 🟥 −34.1196             | 🟩 +0.6229              | 🟥 −34.1196| 🟥 −24030.6152| Large setup fail                     |
+| ss_n40C_1v40     | 🟥 −25.4777             | 🟩 +0.6119              | 🟥 −25.4777| 🟥 −17867.7402| Large setup fail                     |
+| ss_n40C_1v44     | 🟥 −20.7284             | 🟩 +0.4909              | 🟥 −20.7284| 🟥 −14272.8594| Large setup fail                     |
+| ss_n40C_1v76     | 🟥 −4.7197              | 🟩 +0.0038              | 🟥 −4.7197 | 🟥 −2284.7170 | Setup fail                           |
+| ss_n40C_1v60     | 🟥 −9.8793              | 🟩 +0.1628              | 🟥 −9.8793 | 🟥 −5687.9634 | Setup fail                           |
+| tt_025C_1v80     | 🟩 +0.4766              | 🟥 −0.1904              | 🟩 0.0000 | 🟩 0.0000    | Tiny hold issue, good setup          |
+| tt_100C_1v80     | 🟩 +0.5359              | 🟥 −0.1855              | 🟩 0.0000 | 🟩 0.0000    | Very small hold issue                |
 
 ---
 
-### Observations
+## ⭐ Overall Observation
 
-1. 🟩 **FF (Fast-Fast)** and **TT (Typical-Typical)** corners meet setup & hold comfortably.  
-2. 🟩 Hold slacks are positive across all corners — **no hold failures** observed.  
-3. 🟥 **SS (Slow-Slow)** corners show significant setup violations due to **low voltage and high temperature**.  
-4. 🟩 Classic trade-off observed:  
-   - *Fast corners → Hold-critical* (short paths).  
-   - *Slow corners → Setup-critical* (long paths).  
-5. Worst setup violation at *ss_n40C_1v28* (−51.2061 ns) → severe slowdown under cold/low-voltage.  
-6. Indicates need for *path optimization, retiming, or clock relaxation* to close setup timing at slow corners.  
+- ✔ **All FF (fast-fast) corners have:**
+    - Strong setup
+    - Very small hold violations (expected in fast corners)
+- ✔ **All TT (typical-typical) corners are almost clean** except for tiny hold violations.
+- ✔ **All SS (slow-slow) corners show:**
+    - Major and severe setup violations.
+    - Because slow corners → slow cells → timing fails.
 
 ---
-
-### Heatmap 
-In STA, a heatmap is used to visualize the timing slack of different paths under various conditions (PVT corners, clock domains, or corners vs cells). Each cell of the heatmap represents the slack of a particular path under a specific corner.
-
-![Heatmap](Screenshots/sta_min_slack_heatmap.png)
-
-**Inference**
-- Green → Worst slack (more negative or closer to violation)
-- Light yellow → Best slack (more positive, safe)
 ---
+
+## TIMING SUMMARY & VISUALISATIONS
 
 1. **Worst Max Slack Across corners**
 
-![Worst max slack](Screenshots/wms.png)
+<img width="1920" height="1080" alt="wmax gr" src="https://github.com/user-attachments/assets/4ce382cf-24f5-4f32-9f45-de518f449c90" />
+
 
 **Observation**
 - The Setup Slack values for most corners are positive, indicating timing is met for those corners.
-- The worst corner (ss_n40C_1v28) has the maximum setup slack (~-51.21 ns), showing a significant timing violation under the slow-slow (SS) corner at low voltage and low temperature.
+- The worst corner (ss_n40C_1v28) has the maximum setup slack , showing a significant timing violation under the slow-slow (SS) corner at low voltage and low temperature.
 
 ---
 
 2. **Worst Min Slack Across Corners**
 
-![Worst min slack](Screenshots/wmins.jpg)
+<img width="1920" height="1080" alt="hold gr" src="https://github.com/user-attachments/assets/ee65c18d-442f-462c-9bce-816e9c7e382b" />
+
 
 **Observation**
 - The Hold Slack values for most corners are positive, indicating no hold violations for those corners.
-- The worst corner (ss_n40C_1v28) has the minimum hold slack (~1.83 ns), highlighted in dark red.
+- The worst corner (ss_n40C_1v28) has the minimum hold slack.
 
 ---
 
 3. **Worst Negative Slack Across Corners**
 
-![Worst negative slack](Screenshots/wns_chart.jpg)
+<img width="1920" height="1080" alt="wnsgraph" src="https://github.com/user-attachments/assets/6a825f49-66af-449f-a9a4-46549e197164" />
+
 
 **Observation**
 - Some corners have negative setup slack, indicating setup timing violations.
-- The worst negative slack (WNS) occurs at ss_n40C_1v28 with -51.21 ns, highlighted in black.
+- The worst negative slack (WNS) occurs at ss_n40C_1v28 .
 ---
 
 4. **Total Negative Slack Across Corners**
 
-![Total negative slack](Screenshots/tns_chart.jpg)
+<img width="1920" height="1080" alt="tns gr" src="https://github.com/user-attachments/assets/6daf0a2a-4f28-46de-a61e-8f5c44fd5b50" />
+
 
 **Observation**
 - Total Negative Slack aggregates all negative setup slacks.
