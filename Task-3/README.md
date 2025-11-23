@@ -340,7 +340,7 @@ report_units
 ## Steps to do Timing analysis of VSDBabySoC
 
 ```bash
-cd Desktop/SoC/VSDBabySoC
+cd Desktop/vlsi/VSDBabySoC
 sta
 
 # Load Liberty Libraries (standard cell + IPs)
@@ -369,17 +369,9 @@ report_checks -path_delay min
 ```
 **Screenshot**: Terminal Output
  
-![VSDBabySoC terminal op](Screenshots/babysoc_terminal_op.jpg)
+<img width="1920" height="923" alt="w3-50" src="https://github.com/user-attachments/assets/ecaf181d-cf2c-48b0-8fc5-c356c3c5ef24" />
 
----
-**Screenshot**: VSDBabySoC Timing report for max path
- 
-![VSDBabySoC max_path](Screenshots/babysoc_max.jpg)
-
----
-**Screenshot**: VSDBabySoC Timing report for min path
- 
-![VSDBabySoC min_path](Screenshots/babysoc_min.jpg)
+<img width="1920" height="923" alt="w3-51" src="https://github.com/user-attachments/assets/72aba42c-89cf-4b23-84a1-881aa203fae9" />
 
 ---
 # Multi-PVT Corner Timing Analysis of VSDBabySoC using OpenSTA
